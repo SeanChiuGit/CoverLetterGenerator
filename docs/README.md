@@ -21,9 +21,10 @@ A Chrome extension that generates personalized cover letter PDFs from **any resu
 
 ## How to Use
 
-### 1. Upload Your Resume
+### 1. Upload Your Resume & API
 Click the extension icon → paste resume text **or upload PDF/TXT** →  
 Click **Parse & Save Resume**.
+Only needs to do this **once**
 
 
 <p align="center">
