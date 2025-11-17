@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "AI Cover Letter Generator",
+  "version": "3.0",
+  "description": "Generate professional cover letters from any job posting using AI. Supports OpenAI, Groq, Anthropic, Gemini, and more. Works on all websites.",
+
+  "permissions": [
+    "contextMenus",
+    "downloads",
+    "storage",
+    "notifications"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Cover Letter Generator"
+  },
+
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["pdfjs/pdf.worker.mjs"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 400px;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        .section {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .status {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .status.warning {
+            background: #fff3e0;
+            color: #e65100;
+            border-left: 4px solid #ff9800;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: monospace;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .file-upload {
+            margin-bottom: 10px;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload label {
+            display: block;
+            padding: 10px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload label:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 8px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .tab.active {
+            background: white;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #666;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge.success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .badge.error {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Cover Letter Generator</h2>
+
+    <!-- API Key Section -->
+    <div class="section">
+        <h3 style="font-size: 14px; margin-bottom: 10px; color: #555;">API Key</h3>
+        <div id="apiKeyStatus" class="status warning">
+            <span>API Key: Not Set</span>
+        </div>
+
+        <input id="apiKey" type="password" placeholder="Enter your API key (OpenAI, Groq, Anthropic, etc.)" />
+        <div id="apiKeyHint" class="info" style="margin-bottom: 10px;">Provider auto-detected from key format</div>
+
+        <button id="saveApiKey">Save API Key</button>
+    </div>
+
+    <!-- Resume Section -->
+    <div class="section">
+        <h3 style="font-size: 14px; margin-bottom: 10px; color: #555;">Resume</h3>
+        <div id="resumeStatus" class="status warning">
+            <span>No resume uploaded</span>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="paste">Paste Text</button>
+            <button class="tab" data-tab="upload">Upload File</button>
+        </div>
+
+        <div id="pasteTab" class="tab-content active">
+            <textarea id="resumeText" placeholder="Paste your resume text here..."></textarea>
+            <button id="parseResume">Parse & Save Resume</button>
+            <div class="info">Paste your complete resume text above</div>
+        </div>
+
+        <div id="uploadTab" class="tab-content">
+            <div class="file-upload">
+                <input type="file" id="resumeFile" accept=".txt,.pdf,.docx" />
+                <label for="resumeFile">
+                    📄 Click to upload resume<br>
+                    <span style="font-size: 11px; color: #999;">(.pdf or .txt files supported)</span>
+                </label>
+            </div>
+            <button id="uploadResume" disabled>Upload & Parse Resume</button>
+            <div class="info">PDF and TXT files supported. DOCX coming soon.</div>
+        </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="section" style="background: #e3f2fd;">
+        <h3 style="font-size: 13px; margin-bottom: 8px; color: #1565c0;">How to Use</h3>
+        <ol style="font-size: 12px; color: #555; padding-left: 20px; line-height: 1.6;">
+            <li>Enter your API key (OpenAI, Groq, Anthropic, etc.)</li>
+            <li>Upload or paste your resume</li>
+            <li>Select job description text on any website</li>
+            <li>Right-click → "Generate Cover Letter PDF"</li>
+        </ol>
+        <div style="font-size: 11px; color: #666; margin-top: 8px;">
+            Provider auto-detected from key format
+        </div>
+    </div>
+
+    <script src="api-providers.js"></script>
+    <script src="resume-parser.js"></script>
+    <script type="module" src="popup.js"></script>
+</body>
+</html>
