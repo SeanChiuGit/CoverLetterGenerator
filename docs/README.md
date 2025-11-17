@@ -27,7 +27,7 @@ Click **Parse & Save Resume**.
 
 
 <p align="center">
-  <img src="../assets/images/generatorHowToUse.gif" width="600">
+  <img src="../assets/images/generatorHowToUse.gif" width="500">
 </p>
 
 
