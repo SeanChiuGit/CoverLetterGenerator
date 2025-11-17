@@ -4,10 +4,10 @@
  */
 
 // Import PDF.js for PDF parsing
-import * as pdfjsLib from './pdfjs/pdf.mjs';
+import * as pdfjsLib from '../lib/pdfjs/pdf.mjs';
 
 // Set worker source
-pdfjsLib.GlobalWorkerOptions.workerSrc = chrome.runtime.getURL('pdfjs/pdf.worker.mjs');
+pdfjsLib.GlobalWorkerOptions.workerSrc = chrome.runtime.getURL('lib/pdfjs/pdf.worker.mjs');
 
 // DOM Elements
 const apiKeyInput = document.getElementById('apiKey');

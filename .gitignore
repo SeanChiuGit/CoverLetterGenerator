@@ -1,0 +1,67 @@
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Claude / Anthropic local config
+.claude/
+*.claude
+*.anthropic
+*.local.json
+
+# Sensitive/Local files
+.env
+.env.*
+!.env.example
+secrets.json
+credentials.json
+*.pem
+*.key
+*.cert
+api-keys.txt
+
+# Generated/Temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+*.cache
+
+# Node.js (if using npm in future)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# Build outputs
+dist/
+build/
+*.min.js.map
+
+# Chrome Extension development
+*.crx
+*.pem
+*.zip
+extension.zip

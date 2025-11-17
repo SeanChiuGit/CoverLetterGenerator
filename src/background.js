@@ -3,7 +3,7 @@
  * Works on ALL websites using info.selectionText (no content scripts needed)
  */
 
-importScripts("jspdf.umd.min.js");
+importScripts("../lib/jspdf.umd.min.js");
 importScripts("generate-pdf.js");
 importScripts("api-providers.js");
 
@@ -291,7 +291,7 @@ async function downloadPDF(pdfBlob, userName, company, role) {
 function showNotification(title, message) {
     chrome.notifications.create({
         type: "basic",
-        iconUrl: "icon.png",
+        iconUrl: "../assets/images/icon.png",
         title: title,
         message: message
     });
