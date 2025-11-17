@@ -2,9 +2,6 @@
 
 A Chrome extension that generates personalized cover letter PDFs from **any resume** and **any job posting**, using AI with automatic provider detection.
 
-<p align="center">
-  <img src="./generatorHowToUse.gif" width="600">
-</p>
 
 ---
 
@@ -28,15 +25,21 @@ A Chrome extension that generates personalized cover letter PDFs from **any resu
 Click the extension icon → paste resume text **or upload PDF/TXT** →  
 Click **Parse & Save Resume**.
 
+
 <p align="center">
-  <img src="./show.png" width="500">
+  <img src="./generatorHowToUse.gif" width="600">
 </p>
+
+
 
 ### 2. Generate a Cover Letter
 1. Select job description text on any website  
 2. Right-click → **Generate Cover Letter PDF**  
 3. Your personalized PDF downloads automatically  
 
+<p align="center">
+  <img src="./show.png" width="500">
+</p>
 ---
 
 ## Installation (Developer Mode)
