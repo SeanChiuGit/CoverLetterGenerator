@@ -23,7 +23,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Claude / Anthropic local config
-.claude
+.claude/
 
 # Sensitive/Local files
 .env
